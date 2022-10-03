@@ -8,11 +8,11 @@
 	<script>
 		$(function () {
 			$("#btn_submit").click(function() {
-				var formData = {Title: $("#Title").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val() };
+				var formData = {ID: $("#IDLine").val(), Title: $("#Title").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val() };
 				$.ajax({
 				contentType: 'application/json',
 				type: "POST",
-				url: "https://prod-176.westus.logic.azure.com:443/workflows/349ce3045e834bda82e0f4dfc0a8ac78/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=s7-WAIXo9vJHxVtqrq7OCXq6GtM4Ikq-tpuol-6Ic2Q",
+				url: "https://prod-167.westus.logic.azure.com:443/workflows/d4552ee3ccfe4595a0167bac84a6cf97/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=p_9kRwsvWaPXzBPVUJ_6gZsUnaOQKiOg-FDAxDJw0GQ",
 				data: JSON.stringify(formData),
 				success: function () {
 					$("#postResult").val("Success");
@@ -23,21 +23,23 @@
 			});
 			});
 
-			$("#btn_page_update_line").click(function () {
-				window.location.href="updateLine.html";
+			$("#btn_switch_id_field").click(function() {
+				$("#IDLine").prop('disabled', function(i, val) {
+					return !val;
+				});
+				
 			});
 		});
-
-
 	</script>
 </head>
 
 <body>
+	<input type="number" id="IDLine" placeholder="ID Line" value="10" disabled/>
 	<input type="text" id="Title" placeholder="Title" />
 	<input type="text" id="FirstName" placeholder="Firts Name" />
 	<input type="text" id="LastName" placeholder="Last Name" />
 	<button id="btn_submit" >Submit</button>
 	<input id="postResult" type="text" value="Empty" /><br/>
-	<button id="btn_page_update_line">Atualizar Linha</button>
+	<button id="btn_switch_id_field">Habilitar/Desabilitar ID</button>
 </body>
 </html>

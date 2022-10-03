@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.w3.org/1999/xhtml/">
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+
+	<script	src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+	<script>
+		$(function () {
+			$("#btn_submit").click(function() {
+				var formData = {Title: $("#Title").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val() };
+				$.ajax({
+				contentType: 'application/json',
+				type: "POST",
+				url: "https://prod-176.westus.logic.azure.com:443/workflows/349ce3045e834bda82e0f4dfc0a8ac78/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=s7-WAIXo9vJHxVtqrq7OCXq6GtM4Ikq-tpuol-6Ic2Q",
+				data: JSON.stringify(formData),
+				success: function () {
+					$("#postResult").val("Success");
+				},
+				error: function () {
+					$("#postResult").val("Failed");
+				}
+			});
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<input type="text" id="Title" placeholder="Title" />
+	<input type="text" id="FirstName" placeholder="Firts Name" />
+	<input type="text" id="LastName" placeholder="Last Name" />
+	<button id="btn_submit" >Submit</button>
+	<input id="postResult" type="text" value="Empty" /><br/>
+</body>
+</html>
